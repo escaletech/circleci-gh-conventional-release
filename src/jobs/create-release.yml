@@ -1,0 +1,32 @@
+description: Creates a new GitHub Release following Conventional Commits
+
+executor: <<parameters.executor>>
+
+parameters:
+  executor:
+    description: Executor to use for this job.
+    type: executor
+    default: default
+  github-token:
+    description: Personal access token with `repo` or `public_repo` permission.
+    type: string
+    default: ${GITHUB_TOKEN}
+  target-tag:
+    description: The target SemVer tag (e.g. v1.2.3)
+    type: string
+    default: ${CIRCLE_TAG}
+  repo-owner:
+    description: GitHub repository owner's login
+    type: string
+    default: ${CIRCLE_PROJECT_USERNAME}
+  repo-name:
+    description: GitHub repository name
+    type: string
+    default: ${CIRCLE_PROJECT_REPONAME}
+
+steps:
+  - create-release:
+      github-token: <<parameters.github-token>>
+      target-tag: <<parameters.target-tag>>
+      repo-owner: <<parameters.repo-owner>>
+      repo-name: <<parameters.repo-name>>

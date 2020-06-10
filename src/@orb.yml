@@ -1,0 +1,6 @@
+version: 2.1
+
+description: Orb for creating releases on GitHub based on conventional commits
+display:
+  home_url: https://github.com/escaletech
+  source_url: https://github.com/escaletech/circleci-gh-conventional-release

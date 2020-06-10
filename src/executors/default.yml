@@ -1,0 +1,4 @@
+description: Node JS LTS
+
+docker:
+  - image: circleci/node:12

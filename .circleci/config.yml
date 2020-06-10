@@ -1,0 +1,48 @@
+version: 2.1
+
+orbs:
+  orb-tools: circleci/orb-tools@9.1.0
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - orb-tools/lint:
+          lint-dir: src
+          filters:
+            &ci-filters { branches: { ignore: master }, tags: { ignore: /.*/ } }
+      - orb-tools/shellcheck:
+          filters: *ci-filters
+      - orb-tools/pack:
+          filters: *ci-filters
+
+  dev:
+    jobs:
+      - orb-tools/lint:
+          lint-dir: src
+          filters:
+            &dev-filters { branches: { only: master }, tags: { ignore: /.*/ } }
+      - orb-tools/shellcheck:
+          filters: *dev-filters
+      - orb-tools/pack:
+          filters: *dev-filters
+      - orb-tools/publish-dev:
+          filters: *dev-filters
+          context: orb-publishing
+          orb-name: escaletech/gh-conventional-release
+          requires: [orb-tools/lint, orb-tools/shellcheck, orb-tools/pack]
+
+  release:
+    jobs:
+      - orb-tools/pack:
+          filters:
+            &release-filters {
+              branches: { ignore: /.*/ },
+              tags: { only: /v.+/ },
+            }
+      - orb-tools/publish:
+          filters: *release-filters
+          context: orb-publishing
+          orb-ref: escaletech/gh-conventional-release@${CIRCLE_TAG#v}
+          attach-workspace: true
+          requires: [orb-tools/pack]
