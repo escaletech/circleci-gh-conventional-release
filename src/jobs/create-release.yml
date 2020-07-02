@@ -23,6 +23,10 @@ parameters:
     description: GitHub repository name
     type: string
     default: ${CIRCLE_PROJECT_REPONAME}
+  continue-on-error:
+    description: Whether the job should succeed even when an error is encountered.
+    type: boolean
+    default: false
 
 steps:
   - create-release:
@@ -30,3 +34,4 @@ steps:
       target-tag: <<parameters.target-tag>>
       repo-owner: <<parameters.repo-owner>>
       repo-name: <<parameters.repo-name>>
+      continue-on-error: <<parameters.continue-on-error>>
