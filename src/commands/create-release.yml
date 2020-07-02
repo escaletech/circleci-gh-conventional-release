@@ -17,6 +17,10 @@ parameters:
     description: GitHub repository name
     type: string
     default: ${CIRCLE_PROJECT_REPONAME}
+  continue-on-error:
+    description: Whether the command should succeed even when an error is encountered.
+    type: boolean
+    default: false
 
 steps:
   - run:
@@ -26,4 +30,5 @@ steps:
           TARGET_TAG="<<parameters.target-tag>>" \
           REPO_OWNER="<<parameters.repo-owner>>" \
           REPO_NAME="<<parameters.repo-name>>" \
+          CONTINUE_ON_ERROR="<<parameters.continue-on-error>>" \
           npx https://github.com/escaletech/circleci-gh-conventional-release
