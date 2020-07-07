@@ -2,15 +2,29 @@ version: 2.1
 
 orbs:
   orb-tools: circleci/orb-tools@9.1.0
+  coveralls: coveralls/coveralls@1.0
+  gh-release: escaletech/gh-conventional-release@0.1
+
+jobs:
+  test:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test -- --coverage
+      - coveralls/upload
 
 workflows:
   version: 2
   ci:
     jobs:
-      - orb-tools/lint:
-          lint-dir: src
+      - test:
           filters:
             &ci-filters { branches: { ignore: master }, tags: { ignore: /.*/ } }
+      - orb-tools/lint:
+          lint-dir: src
+          filters: *ci-filters
       - orb-tools/shellcheck:
           filters: *ci-filters
       - orb-tools/pack:
@@ -18,14 +32,17 @@ workflows:
 
   dev:
     jobs:
-      - orb-tools/lint:
-          lint-dir: src
+      - test:
           filters:
             &dev-filters { branches: { only: master }, tags: { ignore: /.*/ } }
+      - orb-tools/lint:
+          lint-dir: src
+          filters: *dev-filters
       - orb-tools/shellcheck:
           filters: *dev-filters
       - orb-tools/pack:
           filters: *dev-filters
+          requires: [test]
       - orb-tools/publish-dev:
           filters: *dev-filters
           context: orb-publishing
