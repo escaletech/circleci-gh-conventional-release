@@ -4,7 +4,7 @@
   "description": "Creates a new GitHub Release following Conventional Commits",
   "bin": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,14 @@
   "dependencies": {
     "@octokit/rest": "^17.11.0",
     "semver": "^7.3.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.4",
+    "jest": "^26.1.0"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
   }
 }
