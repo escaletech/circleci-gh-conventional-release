@@ -63,3 +63,6 @@ workflows:
           orb-ref: escaletech/gh-conventional-release@${CIRCLE_TAG#v}
           attach-workspace: true
           requires: [orb-tools/pack]
+      - gh-release/create-release:
+          context: github-create-release
+          requires: [orb-tools/publish]
