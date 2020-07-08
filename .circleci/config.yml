@@ -12,6 +12,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - run: npm run typecheck
       - run: npm test -- --coverage
       - coveralls/upload
 

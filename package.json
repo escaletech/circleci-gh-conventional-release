@@ -4,7 +4,8 @@
   "description": "Creates a new GitHub Release following Conventional Commits",
   "bin": "bin/createRelease.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "typecheck": "tsc --allowJs --checkJs --noEmit ./bin/createRelease.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,8 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.4",
-    "jest": "^26.1.0"
+    "jest": "^26.1.0",
+    "typescript": "^3.9.6"
   },
   "standard": {
     "env": [
