@@ -1,4 +1,8 @@
-# circleci-gh-conventional-releases
+# circleci-gh-conventional-release
+
+[![Coverage Status](https://img.shields.io/coveralls/github/escaletech/circleci-gh-conventional-release/master)](https://coveralls.io/github/escaletech/circleci-gh-conventional-release?branch=fix/not-found-errors)
+[![CircleCI](https://img.shields.io/circleci/build/gh/escaletech/circleci-gh-conventional-release)](https://circleci.com/gh/escaletech/circleci-gh-conventional-release)
+[![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/escaletech/gh-conventional-release)](https://circleci.com/orbs/registry/orb/escaletech/gh-conventional-release)
 
 CircleCI Orb to create releases on GitHub based on tags
 
