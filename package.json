@@ -5,7 +5,8 @@
   "bin": "bin/createRelease.js",
   "scripts": {
     "test": "jest",
-    "typecheck": "tsc --allowJs --checkJs --noEmit ./bin/createRelease.js"
+    "typecheck": "tsc --allowJs --checkJs --noEmit ./bin/createRelease.js",
+    "lint": "standard"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.4",
     "jest": "^26.1.0",
+    "standard": "^14.3.4",
     "typescript": "^3.9.6"
   },
   "standard": {
