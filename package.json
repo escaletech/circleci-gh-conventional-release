@@ -2,7 +2,7 @@
   "name": "circleci-gh-conventional-release",
   "version": "0.0.0",
   "description": "Creates a new GitHub Release following Conventional Commits",
-  "bin": "lib/index.js",
+  "bin": "bin/createRelease.js",
   "scripts": {
     "test": "jest"
   },
