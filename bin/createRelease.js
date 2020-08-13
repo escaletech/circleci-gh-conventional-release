@@ -27,7 +27,7 @@ async function main () {
 
     console.log('Release created: ' + release.html_url)
   } catch (error) {
-    handleError(error)
+    handleError(error, config.continueOnError)
   }
 }
 
