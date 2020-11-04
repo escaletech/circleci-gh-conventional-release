@@ -66,5 +66,6 @@ workflows:
           attach-workspace: true
           requires: [orb-tools/pack]
       - gh-release/create-release:
+          filters: *release-filters
           context: github-create-release
           requires: [orb-tools/publish]
