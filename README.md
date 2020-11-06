@@ -55,3 +55,40 @@ workflows:
 This will result in a GitHub release like the following:
 
 ![](docs/sample-release.png)
+
+### Other CIs
+
+This app may run on other CI software, not only on CircleCI. You need to provide the same variables as you do on CircleCI.
+
+#### Github Actions
+
+```yaml
+name: New Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Install GH Conventional Release
+        run: sudo npm install -g escaletech/circleci-gh-conventional-release
+      - name: Generate Release
+        shell: bash
+        run: |
+          TARGET_TAG="${GITHUB_REF#refs/*/}" \
+          REPO_OWNER="${GITHUB_REPOSITORY%/*}" \
+          REPO_NAME="${GITHUB_REPOSITORY#*/}" \
+          CONTINUE_ON_ERROR="false" \
+          GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}" \
+          circleci-gh-conventional-release
+```
