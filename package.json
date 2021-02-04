@@ -1,12 +1,13 @@
 {
   "name": "circleci-gh-conventional-release",
-  "version": "0.0.0",
+  "version": "0.1.8",
   "description": "Creates a new GitHub Release following Conventional Commits",
   "bin": "bin/createRelease.js",
   "scripts": {
     "test": "jest",
     "typecheck": "tsc --allowJs --checkJs --noEmit ./bin/createRelease.js",
-    "lint": "standard"
+    "lint": "standard",
+    "release": "npx github:escaletech/releaser --update-package-json"
   },
   "repository": {
     "type": "git",
