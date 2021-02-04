@@ -92,3 +92,20 @@ jobs:
           GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}" \
           circleci-gh-conventional-release
 ```
+
+## Development
+
+Pull requests are always welcome!
+
+Accepted pull requests to `master` generates a development orb available as:
+
+```
+orb: escaletech/gh-conventional-release@dev:alpha
+```
+
+In order to publish to production you should generate a new tag.
+
+The convenient and proper way to do it is to run the following command:
+```
+npm run release
+```
