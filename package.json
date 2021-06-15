@@ -5,6 +5,7 @@
   "bin": "bin/createRelease.js",
   "scripts": {
     "test": "jest",
+    "test-ci": "jest test --env=jsdom --testResultsProcessor ./node_modules/jest-sonar-reporter/index.js",
     "typecheck": "tsc --allowJs --checkJs --noEmit ./bin/createRelease.js",
     "lint": "standard",
     "release": "npx github:escaletech/releaser --update-package-json --gpg-sign"
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.4",
     "jest": "^26.1.0",
+    "jest-sonar-reporter": "^2.0.0",
     "standard": "^14.3.4",
     "typescript": "^3.9.6"
   },
@@ -35,5 +37,10 @@
     "env": [
       "jest"
     ]
+  },
+  "jestSonar": {
+    "reportPath": ".",
+    "reportFile": "sonar-report.xml",
+    "indent": 4
   }
 }

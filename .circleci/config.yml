@@ -2,8 +2,8 @@ version: 2.1
 
 orbs:
   orb-tools: circleci/orb-tools@9.1.0
-  coveralls: coveralls/coveralls@1.0
   gh-release: escaletech/gh-conventional-release@0.1
+  sq: escaletech/sonarqube@0.3
 
 jobs:
   test:
@@ -14,8 +14,10 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm run typecheck
-      - run: npm test -- --coverage
-      - coveralls/upload
+      - run: npm run test-ci
+      - persist_to_workspace:
+          root: .
+          paths: [.]
 
 workflows:
   version: 2
@@ -24,6 +26,11 @@ workflows:
       - test:
           filters:
             &ci-filters { branches: { ignore: master }, tags: { ignore: /.*/ } }
+      - sq/scanner:
+          context: sonarqube
+          attach-workspace: true
+          requires: [test]
+          filters: *ci-filters
       - orb-tools/lint:
           lint-dir: src
           filters: *ci-filters
