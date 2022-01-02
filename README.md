@@ -68,7 +68,7 @@ name: New Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   release:
@@ -93,6 +93,24 @@ jobs:
           circleci-gh-conventional-release
 ```
 
+###### Github Actions with template
+
+```yaml
+name: New Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  stage:
+    uses: escaletech/circleci-gh-conventional-release/.github/workflows/create-release-template.yml@master
+    name: "Release"
+    secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
 ## Development
 
 Pull requests are always welcome!
@@ -106,6 +124,7 @@ orb: escaletech/gh-conventional-release@dev:alpha
 In order to publish to production you should generate a new tag.
 
 The convenient and proper way to do it is to run the following command:
+
 ```
 npm run release
 ```

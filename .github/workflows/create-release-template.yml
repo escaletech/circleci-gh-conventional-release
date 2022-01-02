@@ -1,0 +1,44 @@
+name: Create release
+
+on:
+  workflow_call:
+    inputs:
+      target_tag:
+        description: "The target SemVer tag (e.g. v1.2.3)"
+        required: false
+        type: string
+        default: ${{ github.ref_name }}
+      repo_owner:
+        description: "GitHub repository owner's login"
+        required: false
+        type: string
+        default: ${{ github.repository_owner }}
+      repo_name:
+        description: "GitHub repository name"
+        required: false
+        type: string
+        default: ${GITHUB_REPOSITORY#*/}
+      continue_on_error:
+        description: "Whether the command should succeed even when an error is encountered."
+        required: false
+        type: string
+        default: false
+    secrets:
+      gh_token:
+        description: "Personal access token with `repo` or `public_repo` permission."
+        required: true
+
+jobs:
+  terraform:
+    name: "Create"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Release
+        run: |-
+          GITHUB_TOKEN="${{ secrets.gh_token }}" \
+          TARGET_TAG="${{ inputs.target_tag }}" \
+          REPO_OWNER="${{ inputs.repo_owner }}" \
+          REPO_NAME="${{ inputs.repo_name }}" \
+          CONTINUE_ON_ERROR="{{ inputs.continue_on_error }}" \
+          npx https://github.com/escaletech/circleci-gh-conventional-release
