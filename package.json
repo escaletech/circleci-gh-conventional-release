@@ -30,7 +30,7 @@
     "@types/jest": "^26.0.4",
     "jest": "^26.1.0",
     "jest-sonar-reporter": "^2.0.0",
-    "standard": "^14.3.4",
+    "standard": "^16.0.4",
     "typescript": "^3.9.6"
   },
   "standard": {
