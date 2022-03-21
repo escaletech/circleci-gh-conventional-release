@@ -8,7 +8,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: circleci/node:12
+      - image: cimg/node:17.7
     steps:
       - checkout
       - run: npm install
